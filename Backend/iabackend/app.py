@@ -20,5 +20,5 @@ app.register_blueprint(optimal_route_blueprint(G_vial, G_transporte, stops_info,
 
 # ❌ NO pongas app.run() aquí, para producción con Gunicorn
 if __name__ == "__main__":
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host="0.0.0.0", port=port, debug=True)
+    app.run(debug=True)  # Si quieres probar local, usa esto opcional
+
