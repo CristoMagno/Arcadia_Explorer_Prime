@@ -1,4 +1,3 @@
-import os
 from flask import Flask
 from flask_cors import CORS
 from graph_utils import cargar_grafo_vial, cargar_grafo_transporte
@@ -17,8 +16,4 @@ G_transporte, stops_info = cargar_grafo_transporte()
 print("Red de transporte cargada.")
 
 app.register_blueprint(optimal_route_blueprint(G_vial, G_transporte, stops_info, rutas))
-
-# ❌ NO pongas app.run() aquí, para producción con Gunicorn
-if __name__ == "__main__":
-    app.run(debug=True)  # Si quieres probar local, usa esto opcional
-
+# ❌ Elimina por completo app.run()
