@@ -1,0 +1,958 @@
+/* Variables CSS para consistencia */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #4f46e5;
+    --accent-color: #2c84d4; /* Usado en radio buttons, etc. */
+    --background-dark: #1e1e1e;
+    --background-darker: #161827;
+    --background-card: #222222; /* Usado en radio buttons */
+    --input-background: #292929; /* Definido pero no usado directamente en inputs (usan gradiente) */
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --border-color: #444444;
+    --border-focus: var(--primary-color); /* Alineado con primary-color para consistencia */
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --shadow-primary: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.25);
+    --shadow-focus: 0 0 12px rgba(37, 99, 235, 0.4); /* Sombra del primary color */
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --gap-lg: 2.5rem;
+    --gap-md: 1.5rem;
+    --gap-sm: 1rem;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.login-logo {
+  display: none;   /* Buena práctica para imágenes */
+}
+
+/* Estilos para el texto, si necesitas diferenciarlos */
+.login-title-container span {
+  font-size: 1.5rem; /* O el tamaño que desees */
+  font-weight: bold;
+  color: #333;
+}
+/* Contenedor principal mejorado */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px; /* Contenedor general, el wrapper del login será más pequeño */
+    padding: 2rem;
+    animation: fadeInUp 0.6s ease-out;
+}
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--background-darker) 0%, #1a1a2e 50%, #16213e 100%); /* Ajustado para usar variable */
+    min-height: 100vh;
+    display: flex;
+    /* align-items: center; Puede ser problemático si el contenido es más alto que el viewport */
+    justify-content: center;
+    color: var(--text-primary);
+    line-height: 1.6;
+    padding-top: var(--gap-md); /* Para dar espacio si el contenido es largo */
+    padding-bottom: var(--gap-md);
+}
+
+/* Contenedor principal mejorado */
+.signup-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px; /* Contenedor general, el wrapper será más pequeño */
+    padding: var(--gap-sm); /* Usando variable de gap */
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Contenedor de logo mejorado */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: var(--gap-md);
+}
+
+.logo {
+    max-width: 100%;
+    height: auto;
+    /* width: auto; Es redundante si max-width y height: auto están presentes */
+    max-height: 150px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    transition: var(--transition);
+}
+
+.logo:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
+}
+
+/* Wrapper principal mejorado */
+.signup-wrapper {
+    display: flex;
+    background: linear-gradient(145deg, var(--background-dark), #2a2a2a);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-primary);
+    width: 100%;
+    max-width: 1000px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+}
+
+.signup-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+/* Panel de imagen mejorado */
+.signup-image-panel {
+    width: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), #7c3aed);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--gap-lg); /* Usando variable */
+    position: relative;
+    overflow: hidden;
+}
+
+.signup-image-panel::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: subtle-float 6s ease-in-out infinite;
+}
+
+@keyframes subtle-float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+}
+
+.signup-image {
+    max-width: 85%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.signup-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Panel del formulario mejorado */
+.signup-form-panel {
+    width: 50%;
+    padding: var(--gap-lg); /* Usando variable */
+    background: linear-gradient(180deg, var(--background-dark) 0%, #252525 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Títulos mejorados */
+.signup-form-panel h2 {
+    margin-bottom: 0.5rem; /* Podría ser var(--gap-sm) / 2 */
+    font-size: 2.25rem;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    background: linear-gradient(135deg, var(--text-primary), #e5e7eb);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.signup-form-panel p {
+    color: var(--text-secondary);
+    margin-bottom: var(--gap-md); /* Usando variable */
+    font-size: 1.1rem;
+    font-weight: 400;
+}
+
+/* Divisor mejorado */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: var(--gap-md) 0; /* Usando variable */
+    opacity: 0.7;
+}
+
+.divider-line {
+    flex-grow: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+.divider span {
+    margin: 0 var(--gap-sm); /* Usando variable */
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-weight: 500;
+    /* El background puede ser problemático con gradientes. Alternativa: padding sin background o background que coincida mejor. */
+    background: var(--background-dark); /* Asume que el fondo del panel es cercano a esto */
+    padding: 0 0.5rem; /* Mitad de --gap-sm */
+}
+
+/* Inputs de nombre mejorados */
+.name-inputs {
+    display: flex;
+    gap: var(--gap-md);
+    /* margin-bottom: var(--gap-md); Eliminado, cada .input-group ya tiene su margin-bottom */
+}
+
+/* Grupos de input mejorados */
+.input-group, /* Para estructura como name-inputs */
+.form-group {  /* Para inputs individuales */
+    flex: 1; /* Para que los .input-group en .name-inputs se distribuyan */
+    margin-bottom: var(--gap-md); /* Consistencia en espaciado inferior */
+    position: relative;
+}
+
+/* Labels mejorados */
+.input-group label,
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem; /* Podría ser var(--gap-sm) * 0.75 */
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    font-weight: 600;
+    letter-spacing: 0.025em;
+}
+
+/* Inputs mejorados */
+.input-group input,
+.form-group input {
+    width: 100%;
+    padding: 1rem 1.25rem; /* Padding base */
+    background: linear-gradient(145deg, #2a2a2a, #323232); /* Considerar usar variables si estos colores se repiten */
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1; /* Para contexto de apilamiento si es necesario */
+    box-sizing: border-box; /* Ya está en el reset *, pero es bueno ser explícito */
+}
+
+.input-group input::placeholder,
+.form-group input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+.input-group input:focus,
+.form-group input:focus {
+    border-color: var(--border-focus);
+    outline: none; /* Manejado por :focus-visible globalmente */
+    box-shadow: var(--shadow-focus);
+    background: linear-gradient(145deg, #323232, #3a3a3a);
+    transform: translateY(-1px);
+}
+
+/* Estilos de validación */
+.input-group input:invalid:not(:placeholder-shown):not(:focus),
+.form-group input:invalid:not(:placeholder-shown):not(:focus) {
+    border-color: var(--error-color);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.3); /* Usando variable de color de error */
+}
+
+.input-group input:valid:not(:placeholder-shown):not(:focus),
+.form-group input:valid:not(:placeholder-shown):not(:focus) {
+    border-color: var(--success-color);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); /* Usando variable de color de éxito */
+}
+
+/* Input de contraseña mejorado */
+.password-input { /* Contenedor del input y el botón */
+    position: relative;
+    display: flex; 
+    align-items: center;
+}
+
+.password-input input { /* Estilo específico para el input DENTRO de .password-input */
+    /* Hereda width, background, border, color, font-size, etc., de .form-group input o .input-group input */
+    padding-top: 1rem;    /* Coincide con inputs generales */
+    padding-bottom: 1rem; /* Coincide con inputs generales */
+    padding-left: 1.25rem;/* Coincide con inputs generales */
+    /* padding-right necesita espacio para el botón. 
+       Botón tiene padding: 1rem (total 2rem horizontal) + font-size: 1.1rem (texto "Ocultar" ~3-4rem).
+       Es un botón ancho. Aprox. 2rem + 3rem = 5rem = 80px. Más el offset.
+       Si right: 0rem, entonces padding-right debe ser ~ (ancho botón + pequeño margen)
+       Considerando padding: 1rem del botón, es bastante.
+    */
+    padding-right: 120px; /* Estimación para un botón ancho con padding 1rem y texto. Ajustar si el texto del botón cambia o es un icono. */
+    /* box-sizing: border-box; ya debería ser heredado o global */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0rem; /* Un pequeño espacio desde el borde */
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.05); /* Fondo inicial sutil */
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem; /* Ligeramente reducido para ser menos imponente */
+    transition: var(--transition);
+    padding: 0.75rem; /* Reducido para un botón menos masivo */
+    border-radius: var(--border-radius-sm);
+    z-index: 2; /* Elevado para estar sobre el input text, antes era 8 */
+    line-height: 1; /* Para evitar que la altura del texto afecte el tamaño */
+}
+
+.toggle-password:hover {
+    color: rgba(37, 99, 235, 0.8); /* Mejora la retroalimentación */
+    background: rgba(255, 255, 255, 0.05);  /* Aclarado en hover */
+    transform: translateY(-50%) scale(1.05); /* Mantenido scale, pero el transform original debe ser aplicado */
+}
+
+/* .toggle-password:focus se maneja por la regla global de :focus-visible */
+
+
+/* Grupo de radio buttons mejorado */
+.radio-group {
+    display: flex;
+    gap: var(--gap-sm);
+    margin-top: var(--gap-sm); /* Alineado con los gaps */
+    margin-bottom: var(--gap-md); /* Espacio después del grupo */
+}
+
+.radio-option {
+    position: relative;
+    display: inline-block; /* O flex si los hijos necesitan más control */
+    cursor: pointer;
+    flex: 1;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Quita el highlight azul en móviles */
+}
+
+.radio-option input[type="radio"] { /* Más específico */
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+}
+
+.radio-option span { /* Este es el label visual */
+    display: block;
+    padding: 0.875rem 1.5rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+    transition: var(--transition);
+    background: linear-gradient(145deg, var(--background-card), #2a2a2a);
+    color: var(--text-muted);
+    font-weight: 500;
+    position: relative;
+    overflow: hidden; /* Para el efecto ::before */
+}
+
+.radio-option span::before { /* Efecto de brillo en hover */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent); /* Más sutil */
+    transition: var(--transition);
+}
+
+.radio-option:hover span {
+    background: linear-gradient(145deg, #333333, #3a3a3a); /* Considerar variables si estos colores se repiten */
+    border-color: var(--border-focus); /* Usar border-focus en hover para indicar interactividad */
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.radio-option:hover span::before {
+    left: 100%;
+}
+
+.radio-option input[type="radio"]:checked + span {
+    background: linear-gradient(135deg, var(--accent-color), #3b82f6); /* #3b82f6 es un azul, asegurar que combine con accent-color */
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+    box-shadow: 0 4px 16px rgba(var(--accent-color), 0.3); /* Usando variable en la sombra */
+    transform: translateY(-2px);
+}
+
+/* .radio-option input:focus + span se maneja por :focus-visible global */
+
+
+/* Botón de envío mejorado */
+.submit-button {
+    width: 100%;
+    padding: 1.125rem 1.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--text-primary);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-top: var(--gap-md);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 6px 20px rgba(37, 99, 235, 0.3); /* Usar var(--primary-color) en el rgba */
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: var(--transition);
+}
+
+.submit-button:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.submit-button:hover::before {
+    left: 100%;
+}
+
+.submit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4); /* Usar var(--primary-color) en el rgba */
+}
+
+/* .submit-button:focus se maneja por :focus-visible global */
+
+
+/* Botón Google y Continuar (estilos similares, se pueden agrupar si se desea) */
+.google-button,
+.continue-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 1.1rem; /* Consistencia con submit-button */
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: var(--gap-sm); /* Unificado el margen superior */
+}
+
+.google-button {
+    background: linear-gradient(145deg, #ffffff, #f8f9fa); /* Fondo claro */
+    border: 2px solid #e5e7eb; /* Borde claro, considerar variable */
+    color: #374151; /* Texto oscuro, considerar variable */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.google-button:hover {
+    background: linear-gradient(145deg, #f8f9fa, #ffffff);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-color: #d1d5db; /* Borde más oscuro en hover */
+}
+
+.google-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 0.75rem;
+}
+
+.continue-button {
+    background: linear-gradient(135deg, #4a36b9, #6d28d9); /* Colores específicos, podrían ser variables */
+    color: var(--text-primary);
+    border: none;
+    box-shadow: 0 4px 16px rgba(74, 54, 185, 0.3); /* Sombra con colores específicos */
+}
+
+.continue-button:hover {
+    background: linear-gradient(135deg, #5b21b6, #4a36b9);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(74, 54, 185, 0.4);
+}
+
+.continue-button:active {
+    transform: translateY(0);
+}
+
+/* Enlace para Iniciar Sesión / Registrarse */
+.auth-link { /* Clase más genérica si se usa en login y signup */
+    text-align: center;
+    margin-top: var(--gap-md);
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.auth-link a {
+    color: var(--accent-color); /* Usar accent-color para enlaces */
+    text-decoration: none;
+    font-weight: 600; /* Un poco más de peso */
+    transition: var(--transition);
+    position: relative;
+    padding-bottom: 2px; /* Espacio para el subrayado animado */
+}
+
+.auth-link a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* Para que la animación empiece desde el centro */
+    background: var(--accent-color);
+    transition: var(--transition);
+}
+
+.auth-link a:hover {
+    color: var(--primary-color); /* O mantener accent-color y solo cambiar el subrayado */
+}
+
+.auth-link a:hover::after {
+    width: 100%;
+    background: var(--primary-color); /* O mantener accent-color */
+}
+
+
+/* Media Queries mejoradas */
+@media (max-width: 1024px) {
+    .login-title-container {
+  display: flex;         /* Activa Flexbox */
+  align-items: center;   /* Alinea verticalmente los ítems al centro */
+  justify-content: flex-start; /* ALINEA LOS ELEMENTOS AL INICIO (IZQUIERDA) DEL CONTENEDOR */
+  gap: 10px;             /* Espacio entre el logo y el texto */
+  margin-bottom: 10px;   /* Espacio debajo del título */
+  /* Si el contenedor del h2 no ocupa todo el ancho y quieres que lo haga,
+     puedes añadir width: 100%; pero dependerá de tu layout general. */
+}
+   .login-logo {
+  max-width: 100%;    /* Asegura que el logo no exceda el contenedor si es muy grande */
+  height: 40px;       /* Ajusta la altura deseada para el logo, ej: 40px o 50px como tenías */
+  width: auto;        /* Mantiene la proporción del logo */
+  display: block;     /* Buena práctica para imágenes */
+}
+
+/* Estilos para el texto, si necesitas diferenciarlos */
+.login-title-container span {
+  font-size: 1.5rem; /* O el tamaño que desees */
+  font-weight: bold;
+  color: #333;
+}
+    .signup-image-panel { /* Ocultar panel de imagen para más espacio */
+        display: none;
+    }
+    .signup-form-panel {
+        width: 100%; /* Panel de formulario ocupa todo el ancho */
+        padding: var(--gap-lg) var(--gap-md); /* Ajustar padding */
+    }
+    .signup-wrapper {
+      max-width: 600px; /* Reducir el ancho máximo si solo es el formulario */
+    }
+}
+
+@media (max-width: 768px) {
+    .login-title-container {
+  display: flex;         /* Activa Flexbox */
+  align-items: center;   /* Alinea verticalmente los ítems al centro */
+  justify-content: flex-start; /* ALINEA LOS ELEMENTOS AL INICIO (IZQUIERDA) DEL CONTENEDOR */
+  gap: 10px;             /* Espacio entre el logo y el texto */
+  margin-bottom: 10px;   /* Espacio debajo del título */
+  /* Si el contenedor del h2 no ocupa todo el ancho y quieres que lo haga,
+     puedes añadir width: 100%; pero dependerá de tu layout general. */
+}
+   .login-logo {
+  max-width: 100%;    /* Asegura que el logo no exceda el contenedor si es muy grande */
+  height: 40px;       /* Ajusta la altura deseada para el logo, ej: 40px o 50px como tenías */
+  width: auto;        /* Mantiene la proporción del logo */
+  display: block;     /* Buena práctica para imágenes */
+}
+
+/* Estilos para el texto, si necesitas diferenciarlos */
+.login-title-container span {
+  font-size: 1.5rem; /* O el tamaño que desees */
+  font-weight: bold;
+  color: #333;
+}
+    .signup-wrapper { /* Ya está column en la query original, pero la de 1024px la oculta */
+        flex-direction: column; /* Confirmar por si la imagen se mostrara */
+    }
+    /* .signup-image-panel sigue display:none de la query de 1024px */
+    .signup-form-panel {
+        padding: var(--gap-md); /* Reducir padding */
+    }
+
+    .signup-form-panel h2 {
+        font-size: 2rem;
+    }
+    .signup-form-panel p {
+        font-size: 1rem;
+        margin-bottom: var(--gap-sm);
+    }
+
+    .divider span {
+        font-size: 0.8rem;
+    }
+
+    .input-group input,
+    .form-group input {
+        font-size: 1rem; /* Mantener 1rem/16px para evitar zoom en iOS */
+        padding: 0.875rem 1rem;
+    }
+    /* Ajuste para el input de contraseña específico en esta breakpoint */
+    .password-input input {
+        padding-top: 0.875rem;
+        padding-bottom: 0.875rem;
+        padding-left: 1rem;
+        padding-right: 90px; /* Ajustado para botón con padding 0.75rem */
+    }
+    .toggle-password {
+        padding: 0.6rem; /* Más pequeño */
+        font-size: 0.9rem;
+        right: 0.4rem;
+    }
+
+
+    .submit-button,
+    .google-button,
+    .continue-button {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+
+    .name-inputs {
+        gap: var(--gap-sm); /* Reducir gap */
+    }
+
+    .radio-option span {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .login-title-container {
+  display: flex;         /* Activa Flexbox */
+  align-items: center;   /* Alinea verticalmente los ítems al centro */
+  justify-content: flex-start; /* ALINEA LOS ELEMENTOS AL INICIO (IZQUIERDA) DEL CONTENEDOR */
+  gap: 10px;             /* Espacio entre el logo y el texto */
+  margin-bottom: 10px;   /* Espacio debajo del título */
+  /* Si el contenedor del h2 no ocupa todo el ancho y quieres que lo haga,
+     puedes añadir width: 100%; pero dependerá de tu layout general. */
+}
+    .login-logo {
+  max-width: 100%;    /* Asegura que el logo no exceda el contenedor si es muy grande */
+  height: 40px;       /* Ajusta la altura deseada para el logo, ej: 40px o 50px como tenías */
+  width: auto;        /* Mantiene la proporción del logo */
+  display: block;     /* Buena práctica para imágenes */
+}
+
+/* Estilos para el texto, si necesitas diferenciarlos */
+.login-title-container span {
+  font-size: 1.5rem; /* O el tamaño que desees */
+  font-weight: bold;
+  color: #333;
+}
+    body {
+      padding-top: var(--gap-sm);
+      padding-bottom: var(--gap-sm);
+    }
+    .signup-container {
+        width: 100%; /* Ocupa todo el ancho disponible con padding del body */
+        padding: 0 var(--gap-sm); /* Padding lateral en el container */
+    }
+
+    .signup-wrapper {
+        /* width: 100%; Ya se hereda */
+        border-radius: var(--border-radius); /* Mantener radio o reducir a sm */
+        margin-left: 0; /* Asegurar que no haya márgenes extraños */
+        margin-right: 0;
+    }
+
+    .logo-container {
+      margin-bottom: var(--gap-sm);
+    }
+    .logo {
+        max-height: 100px;
+    }
+
+    .signup-form-panel {
+        padding: var(--gap-md) var(--gap-sm); /* Ajustar padding */
+    }
+
+    .signup-form-panel h2 {
+        font-size: 1.75rem;
+        margin-bottom: var(--gap-sm);
+    }
+
+    .input-group,
+    .form-group {
+        margin-bottom: var(--gap-sm); /* Reducir margen inferior */
+    }
+    
+    .name-inputs {
+        flex-direction: column;
+        gap: 0; /* El margin-bottom de .input-group se encargará del espacio */
+        /* margin-bottom: 0; ya no es necesario */
+    }
+    .name-inputs .input-group:not(:last-child) { /* Añadir margen solo si no es el último */
+        margin-bottom: var(--gap-sm);
+    }
+    .name-inputs .input-group:last-child { /* Quitar margen al último si es necesario */
+        margin-bottom: var(--gap-md); /* O mantener el gap global para el siguiente elemento */
+    }
+
+
+    /* .signup-image-panel sigue display:none */
+
+    .radio-group {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .radio-option span {
+        padding: 1rem; /* Hacerlos más grandes para tap fácil */
+    }
+
+    .divider {
+        margin: var(--gap-sm) 0;
+    }
+
+    /* Ajuste más específico para input de contraseña */
+    .password-input input {
+        padding-right: 80px; /* Para botón más pequeño */
+    }
+    .toggle-password {
+        padding: 0.5rem;
+        font-size: 0.85rem;
+        right: 0.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-title-container {
+  display: flex;         /* Activa Flexbox */
+  align-items: center;   /* Alinea verticalmente los ítems al centro */
+  justify-content: flex-start; /* ALINEA LOS ELEMENTOS AL INICIO (IZQUIERDA) DEL CONTENEDOR */
+  gap: 10px;             /* Espacio entre el logo y el texto */
+  margin-bottom: 10px;   /* Espacio debajo del título */
+  /* Si el contenedor del h2 no ocupa todo el ancho y quieres que lo haga,
+     puedes añadir width: 100%; pero dependerá de tu layout general. */
+}
+   .login-logo {
+  max-width: 100%;    /* Asegura que el logo no exceda el contenedor si es muy grande */
+  height: 40px;       /* Ajusta la altura deseada para el logo, ej: 40px o 50px como tenías */
+  width: auto;        /* Mantiene la proporción del logo */
+  display: block;     /* Buena práctica para imágenes */
+}
+
+/* Estilos para el texto, si necesitas diferenciarlos */
+.login-title-container span {
+  font-size: 1.5rem; /* O el tamaño que desees */
+  font-weight: bold;
+  color: #333;
+}
+    .logo {
+        max-height: 80px;
+    }
+    .signup-container {
+        /* padding: 0.75rem; Ya gestionado por la query de 600px y body */
+    }
+    .signup-form-panel {
+        padding: var(--gap-sm) 0.75rem ; /* Ajustar padding */
+    }
+    .signup-form-panel h2 {
+        font-size: 1.6rem;
+    }
+    
+    .input-group input,
+    .form-group input {
+        font-size: 0.95rem; /* Cuidado con <16px por auto-zoom en iOS */
+        padding: 0.75rem 1rem;
+    }
+    /* Ajuste para contraseña en pantallas muy pequeñas */
+    .password-input input {
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        padding-left: 1rem;
+        padding-right: 70px; /* Espacio para un botón aún más pequeño o icono */
+    }
+    .toggle-password {
+        padding: 0.4rem;
+        font-size: 0.8rem; /* Considerar usar un icono aquí */
+        right: 0.2rem;
+    }
+
+    .submit-button,
+    .google-button,
+    .continue-button {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Mejoras de accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Estados de enfoque mejorados para accesibilidad */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+.radio-option input[type="radio"]:focus-visible + span { /* Específico para radios estilizados */
+    outline: 3px solid var(--border-focus);
+    outline-offset: 2px;
+    box-shadow: none; /* Para evitar conflictos con otros box-shadow en :focus */
+}
+
+/* Quitar outlines genéricos de :focus si :focus-visible los maneja */
+.input-group input:focus, .form-group input:focus { outline: none; }
+.submit-button:focus { outline: none; }
+.toggle-password:focus { outline: none; }
+
+
+/* Loading state para botones */
+.button-loading { /* Aplicar a cualquier botón que pueda tener un estado de carga */
+    color: transparent !important; /* Oculta el texto original */
+    pointer-events: none; /* Deshabilita interacciones */
+    position: relative; /* Necesario para el spinner absoluto */
+}
+
+.button-loading::after { /* Spinner */
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrado perfecto */
+    border: 3px solid rgba(255, 255, 255, 0.2); /* Color base del spinner, usa var(--text-primary) con opacidad */
+    border-top-color: var(--text-primary); /* Color de la parte animada */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Estados de formulario adicionales (ya estaban bien) */
+.form-success { /* Aplicar a .input-group o .form-group */
+    border-color: var(--success-color) !important; /* Podría no ser necesario si el input ya lo hace */
+    /* box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1) !important; */ /* Puede ser redundante con el input */
+}
+
+.form-error { /* Aplicar a .input-group o .form-group */
+    border-color: var(--error-color) !important;
+    /* box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important; */
+}
+
+/* Mensaje de error/éxito debajo del campo */
+.field-message {
+    display: block; /* Para que ocupe su propia línea */
+    margin-top: 0.5rem; /* var(--gap-sm) / 2 */
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4; /* Para mejor legibilidad */
+}
+
+.field-message.error {
+    color: var(--error-color);
+}
+
+.field-message.success {
+    color: var(--success-color);
+}
+
+/* Indicador de fortaleza de contraseña (ya estaba bien) */
+.password-strength {
+    margin-top: 0.5rem; /* var(--gap-sm) / 2 */
+    height: 6px; /* Un poco más visible */
+    background-color: var(--border-color); /* Fondo más oscuro que el input */
+    border-radius: 3px; /* Mitad de la altura */
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    transition: width var(--transition), background-color var(--transition); /* Transicionar también el color */
+    border-radius: 3px;
+}
+
+.password-strength-weak { 
+    background-color: var(--error-color);
+    width: 25%;
+}
+
+.password-strength-medium { 
+    background-color: var(--warning-color);
+    width: 50%;
+}
+
+.password-strength-strong { 
+    background-color: var(--success-color);
+    width: 75%;
+}
+
+.password-strength-very-strong { 
+    background-color: var(--success-color); /* O un color ligeramente diferente para "muy fuerte" */
+    width: 100%;
+    /* box-shadow: 0 0 8px rgba(16, 185, 129, 0.3); Opcional, la barra llena puede ser suficiente */
+}

@@ -1,0 +1,882 @@
+:root {
+  --primary-color: #2563eb;
+  --primary-hover: #4f46e5;
+  --primary-active: #2b3a91;
+  --dark-bg: #121212;
+  --error-bg: #fef2f2;
+  --error-border: #e53e3e;
+  --error-text: #9b2c2c;
+  --text-light: #ffffff;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+   --sidebar-mobile-button-size: 50px;
+  --sidebar-collapsed-width: 60px;
+}
+.reload {
+  height: 100%;
+}
+
+/* Contenedor principal fullscreen - Corregido para evitar que el mapa esté cortado */
+.mapRoot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-bg);
+  font-family: "Inter", Arial, sans-serif;
+  color: var(--text-light);
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+.poiMenuItemActive {
+  background-color: rgba(0, 0, 0, 0.15); /* O el color que prefieras */
+  font-weight: bold;
+}
+
+.mapHeader {
+  padding: 1rem;
+  z-index: 100; /* Aumentado z-index para asegurar que quede por encima */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: auto;
+  padding-right: 1rem;
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.mapTitle {
+  color: var(--text-light);
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to right, #292036, #000000, 0.01);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  pointer-events: auto; /* Para asegurar que sea interactivo */
+}
+
+/* Contenedor del mapa (ocupará todo el espacio disponible) - Modificado para asegurar cobertura completa */
+.mapContainer {
+  flex: 1;
+  width: 100%;
+  height: 100%; /* Asegura altura completa */
+  position: relative;
+}
+
+/* Estilo para el elemento del mapa (Google Maps) - Ajustado para asegurar cobertura completa */
+.mapElement {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; /* Asegura que el mapa ocupe toda la altura */
+}
+
+/* Controles flotantes */
+.mapControls {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mapHeader > * { 
+  pointer-events: auto;
+}
+
+.mapButton {
+  background: linear-gradient(to right, #292036, #000000);
+  color: var(--text-light);
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  z-index: 10;
+  height: 100%;
+}
+
+.mapButton:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.mapButton:active {
+  background-color: var(--primary-active);
+  transform: scale(0.98);
+}
+
+/* Mensajes y estados */
+.errorBox {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--error-bg);
+  border: 1px solid var(--error-border);
+  color: var(--error-text);
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  z-index: 10;
+  max-width: 90%;
+  text-align: center;
+  pointer-events: auto; /* Añadido para asegurar interactividad */
+}
+
+.loadingState {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+
+.spinner {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(37, 99, 235, 0.3);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+/* Botones mejorados */
+.mapButton {
+  background-color: rgba(37, 99, 235, 0.8);
+  color: var(--text-light);
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  pointer-events: auto; /* Asegura que sean interactivos */
+}
+
+.mapButton:hover {
+  background-color: rgba(37, 99, 235, 0.9);
+  transform: scale(1.05);
+}
+
+.mapButton:active {
+  background-color: rgba(37, 99, 235, 1);
+  transform: scale(0.98);
+}
+
+/* Animaciones */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Media Queries para diferentes tamaños */
+@media (max-width: 768px) {
+  .mapHeader {
+    padding: 0.75rem;
+  }
+
+  .mapTitle {
+    font-size: 1.5rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mapHeader {
+    padding: 0.5rem;
+    gap: 0.3rem;
+  }
+
+  .mapTitle {
+    font-size: 1.5rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+/* Estilos para GPS */
+.gpsToggle {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  pointer-events: auto; /* Añadido para asegurar interactividad */
+}
+
+.gpsToggle.active {
+  background-color: #e1f5fe;
+  border-color: #0288d1;
+  color: #0288d1;
+}
+
+.gpsLabel {
+  margin-left: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.gpsInfo {
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin-top: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+  pointer-events: auto; /* Añadido para asegurar interactividad */
+}
+
+.gpsCoords {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+.gpsTimestamp {
+  font-size: 12px;
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Transparencia en header */
+.transparentHeader {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  pointer-events: none;
+}
+
+/*Botones de lugares por categoría*/
+.footerButtons {
+  position: fixed; /* Cambiado a fixed para mejor posicionamiento */
+  bottom: 0; /* Asegura que esté en la parte inferior */
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.4rem;
+  width: 100%;
+  z-index: 100;
+  background-color: rgba(18, 18, 18, 0.9);
+}
+
+.categoryButton {
+  background-color: rgba(37, 99, 235, 0.8);
+  color: var(--text-light);
+  font-weight: 600;
+  padding: 0.3rem 0.8rem;
+  border-radius: 1.5rem;
+  border: none;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.categoryButton:hover {
+  background-color: var(--primary-hover);
+  transform: scale(1.05);
+}
+
+.categoryButton:active {
+  background-color: var(--primary-active);
+  transform: scale(0.97);
+}
+
+/* Contenedor FAB para POIs */
+.poiFabContainer {
+  
+  position: fixed;
+  bottom: 5rem;
+  right: .3rem;
+  z-index: 1010;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.poiFab {
+  background: linear-gradient(145deg, #221e2b 0%, #241ba5 100%);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 2px 6px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  outline: none;
+}
+
+.poiFab:hover {
+  transform: translateY(-4px) scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 4px 8px rgba(0,0,0,0.25);
+}
+
+.poiFab:active {
+  transform: translateY(-1px) scale(0.97);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+/* Menú POI */
+.poiMenu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+  background-color: transparent;
+  padding: 1rem; 
+  margin-bottom: 1rem; 
+  width: max-content; 
+  gap: 0.3rem; 
+  max-height: calc(100vh - 12rem); 
+  overflow-y: hidden; 
+  pointer-events: none;
+}
+
+/* Animación para ítems del menú */
+@keyframes emergeItem {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.7);
+  }
+  60% {
+    transform: translateY(-5px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ítems de menú POI */
+.poiMenuItem {
+  background-color: rgba(45, 55, 72, 0.92); 
+  color: #e8e8e8; 
+  border: none;
+  border-radius: 22px; 
+  height: 44px; 
+  padding: 0 11px; 
+  cursor: pointer;
+  display: flex;
+  align-items: center; 
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25); 
+  pointer-events: auto;
+  
+  opacity: 0;
+  transform: scale(0.6) translateY(10px);
+  animation-name: emergeItem;
+  animation-duration: 0.35s;
+  animation-timing-function: cubic-bezier(0.1, 0.7, 0.3, 1);
+  animation-fill-mode: forwards;
+  
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.poiMenuItem svg {
+  flex-shrink: 0; 
+  transition: transform 0.2s ease-in-out;
+}
+
+.poiMenuItemText {
+  font-size: 0.9rem; 
+  font-weight: 500;
+  white-space: nowrap; 
+  opacity: 0;
+  max-width: 0;
+  margin-left: 0;
+  transition: opacity 0.25s ease-out 0.1s, 
+              max-width 0.3s cubic-bezier(0.23, 1, 0.32, 1),
+              margin-left 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.poiMenuItem:hover,
+.poiMenuItem:focus {
+  background-color: rgba(76, 136, 255, 0.95); 
+  color: #ffffff; 
+  outline: none; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); 
+}
+
+.poiMenuItem:hover svg,
+.poiMenuItem:focus svg {
+  transform: scale(1.12);
+}
+
+.poiMenuItem:hover .poiMenuItemText,
+.poiMenuItem:focus .poiMenuItemText {
+  opacity: 1;
+  max-width: 180px; 
+  margin-left: 0.85rem; 
+}
+
+/* En GoogleMaps.module.css */
+.mapOverlayMessage {
+  position: absolute;
+  top: 70px; /* Ajusta según tu header */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(40, 40, 40, 0.85);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  z-index: 1001; /* Encima del mapa */
+  font-size: 0.9rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  text-align: center;
+}
+
+.gpsToggle.externalActive svg { /* Ejemplo para resaltar el botón de GPS Externo activo */
+  color: #EF4444; /* Rojo, por ejemplo */
+}
+
+/* ... (tus estilos existentes) ... */
+
+/* Estilos para la leyenda de rutas */
+.routeLegendContainer {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Posición base para móviles o cuando el sidebar no está visible/es angosto */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 500; 
+  max-height: 200px; 
+  overflow-y: auto;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  max-width: 250px;
+  transition: left 0.3s ease-in-out; /* Para una transición suave si la posición cambia */
+}
+
+@media (min-width: 1024px) { /* Puedes ajustar este breakpoint según sea necesario */
+  .routeLegendContainer {
+    left: 5%; }
+}
+
+.routeLegendHeader {
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.routeLegendList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.routeLegendItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.85em;
+}
+
+.routeLegendItem:last-child {
+  margin-bottom: 0;
+}
+
+.routeLegendColorSquare {
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.routeLegendName {
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
+
+
+/* frontend/src/Estilos/GoogleMaps.module.css */
+
+/* Make sure these variables from Sidebar.css are globally available or define fallbacks */
+/* Example:
+:root {
+  --sidebar-mobile-button-size: 50px;
+  --sidebar-collapsed-width: 60px;
+}
+*/
+
+/* In GoogleMaps.module.css */
+
+.transportInfoContainer {
+  display: flex;
+  flex-direction: row;   /* Items laid out horizontally */
+  flex-wrap: nowrap;     /* Items do not wrap to the next line */
+  
+  /* --- MODIFICATION HERE --- */
+  /* align-items: flex-start; */ /* This was causing the button to move up */
+  align-items: flex-end;   /* This will align the button and panel along their bottom edges */
+  /* --- END MODIFICATION --- */
+  
+  position: fixed;
+  left: 25px;
+  /* The container's bottom edge is fixed. When height increases, it grows upwards. */
+  bottom: calc(25px + var(--sidebar-mobile-button-size, 50px) + 10px);
+  
+  width: auto; /* Container width adjusts to content */
+  min-height: var(--sidebar-mobile-button-size, 50px); /* Ensures container is at least as tall as the button */
+  z-index: 50;
+  
+  transition: left 0.3s ease-in-out, bottom 0.3s ease-in-out;
+}
+
+/* Styles for .transportInfoButton and .transportInfoPanel remain the same as previously defined */
+.transportInfoButton {
+  /* Assuming styles similar to these: */
+  background: linear-gradient(to right, #3a2c4a, #1a1523);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease-out;
+  flex-shrink: 0;
+}
+
+.transportInfoButton:hover {
+  background: linear-gradient(to right, #4a3c5a, #2a2533);
+  box-shadow: 0 3px 7px rgba(0,0,0,0.25);
+}
+
+.transportInfoButton.infoButtonActive {
+  background: linear-gradient(to right, #2a1533, #0a0513);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.transportInfoPanel {
+  margin-left: 10px;
+  background-color: #ffffff;
+  color: #333740;
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border: 1px solid #ddd;
+  font-size: 0.8rem;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 50%;
+
+  /* Animation styles */
+  opacity: 0;
+  transform: translateX(-20px) scaleX(0.9);
+  transform-origin: left center; /* Animation origin remains the same */
+  animation: deployInfoPanel 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes deployInfoPanel {
+  to {
+    opacity: 1;
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+@media (min-width: 769px) {
+  .transportInfoContainer {
+    /* Desktop positioning: Bottom-left, adjusted for sidebar width */
+    left: calc(var(--sidebar-collapsed-width, 60px) + 25px); /* sidebar width + desired offset */
+    bottom: 25px;
+  }}
+
+
+
+  /* Estilos para el panel de control de rutas */
+.routeControlsContainer {
+  position: absolute;
+  top: 10px; /* Ajusta según sea necesario */
+  left: 70px; /* Ajusta si tienes una sidebar, o colócalo donde prefieras */
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  max-width: 280px;
+  max-height: calc(100vh - 100px); /* Altura máxima para evitar desbordamiento */
+  overflow-y: auto; /* Scroll si hay muchas rutas */
+  backdrop-filter: blur(5px);
+}
+
+.routeControlHeader {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 5px;
+}
+
+.routeControlGlobalButtons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.routeControlButton {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.routeControlButton:hover {
+  background-color: #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.routeButtonList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.routeButtonItem {
+  margin-bottom: 5px;
+}
+
+.routeToggleButton {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Para el ícono de ojo */
+}
+
+.routeButtonColorSquare {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-right: 8px;
+  border: 1px solid rgba(0,0,0,0.2); /* Borde sutil para el cuadradito de color */
+  flex-shrink: 0;
+}
+
+.routeToggleButton .FaEye, .routeToggleButton .FaEyeSlash {
+    margin-left: auto; /* Empuja el ícono al final si el texto es corto */
+    padding-left: 5px;
+    flex-shrink: 0;
+}
+
+
+/* Estilo para el botón cuando la ruta está visible */
+.routeVisible {
+  /* El estilo se aplica inline ahora para usar route.color */
+  /* font-weight: bold; */
+}
+
+/* Estilo para el botón cuando la ruta está oculta */
+.routeHidden {
+   /* El estilo se aplica inline ahora para usar route.color */
+}
+
+.routeLegendTitle {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+/* Ajustes al contenedor de leyenda existente si es necesario */
+.routeLegendContainer {
+  /* position: absolute;  Ya lo tienes así probablemente */
+  /* bottom: 40px; */ /* Ajusta para que no choque con doubleClickLegend */
+  /* right: 10px; */
+  /* ... otros estilos ... */
+  background-color: rgba(255, 255, 255, 0.85); /* Fondo un poco más opaco */
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+}
+
+/* Estilos para los botones de control flotantes sobre el mapa */
+.mapControlsOverlay {
+  position: absolute;
+  top: 10px; /* Ajusta según tu header o sidebar */
+  right: 10px;
+  z-index: 10; /* Encima del mapa pero debajo de modales si los hubiera */
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Espacio entre botones */
+}
+
+.centerUserButton,
+.clearMapButton {
+  /* Heredan estilos de .mapButton pero pueden tener specifics */
+  padding: 8px;
+  border-radius: 50%; /* O cuadrado si prefieres */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  background-color: white;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+.centerUserButton:hover,
+.clearMapButton:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.05);
+}
+.clearMapButton {
+  background-color: #ffebee; /* Un rojo claro para indicar "peligro" o limpieza */
+  border-color: #ffcdd2;
+}
+.clearMapButton:hover {
+  background-color: #ffcdd2;
+}
+
+
+/* Ajustes al panel de información de transporte */
+.transportInfoContainer {
+  /* Si está dentro de .mapControlsOverlay, no necesita position: absolute */
+}
+.transportInfoPanel {
+  /* ... tus estilos existentes ... */
+  background-color: rgba(255, 255, 255, 0.98);
+  padding: 12px 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  width: 280px; /* O el ancho que prefieras */
+  font-size: 0.85rem;
+  color: #333;
+}
+.transportInfoPanel ul {
+  padding-left: 18px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.transportInfoPanel li {
+  margin-bottom: 5px;
+}
+
+/* Mejoras a la leyenda de rutas */
+.routeLegendContainer {
+  background-color: rgba(255, 255, 255, 0.92);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+  /* Posicionamiento (ya lo tienes) */
+}
+.routeLegendTitle {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #2c3e50;
+  font-size: 0.85em;
+}
+.routeLegendItem {
+  /* ... */
+  font-size: 0.8em;
+}
+
+
+/* Mensaje de overlay (general) */
+.mapOverlayMessage {
+  /* ... tus estilos ... */
+  padding: 10px 15px;
+  font-size: 0.9em;
+  border-radius: 5px;
+  /* Otros estilos como color de fondo, texto, etc. */
+}
+.errorBox { /* Si es un error específico, hereda de mapOverlayMessage y añade: */
+  background-color: rgba(239, 68, 68, 0.9); /* Rojo translúcido */
+  color: white;
+  font-weight: 500;
+}
+
+/* Spinner de Carga */
+.loadingState {
+  /* ... tus estilos ... */
+  color: #4a4a4a;
+  font-size: 1rem; /* Un poco más pequeño */
+}
+.spinner {
+ border: 4px solid rgba(0, 0, 0, 0.1);
+ width: 36px; /* Un poco más pequeño */
+ height: 36px;
+ border-radius: 50%;
+ border-left-color: #3498db; /* Un azul agradable */
+ animation: spin 0.8s linear infinite; /* Más rápido */
+ margin-bottom: 12px;
+}
+
+@keyframes spin {
+ to { transform: rotate(360deg); }
+}
+
+/* Estilos para los botones de POI (ya existentes, pero revisa) */

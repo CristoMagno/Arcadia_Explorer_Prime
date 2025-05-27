@@ -1,0 +1,67 @@
+.splashContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(to top, #292036, #000000);
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    opacity: 1;
+    visibility: visible;
+    /* Transición SUAVE para el fade-out (salida) */
+    /* Aumentamos la duración a 2.5s y usamos cubic-bezier para un efecto más natural */
+    transition: opacity 2.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0s 2.5s;
+  }
+  
+  /* Clase para ocultar el splash screen con fade-out */
+  .splashContainerHidden {
+    opacity: 0;
+    visibility: hidden;
+    /* No necesitamos transition-delay aquí ya que lo manejamos con la transición de visibility arriba */
+  }
+  
+  .splashLogo {
+    max-width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    /* Animación de entrada para el logo */
+    animation: fadeInScale 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    /* Usamos cubic-bezier para un easing más personalizado y aumentamos duración */
+  }
+  
+  .splashTitle {
+    font-size: 2rem;
+    opacity: 0; /* Asegura que empieza invisible antes de la animación */
+    /* Animación de entrada para el título, con retraso */
+    animation: fadeInSmooth 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5s forwards;
+    /* Retraso de 0.5s, cubic-bezier diferente, mayor duración */
+  }
+  
+  /* Keyframes para las ANIMACIONES DE ENTRADA */
+  
+  @keyframes fadeInScale {
+    0% { /* Estado inicial */
+      opacity: 0;
+      transform: scale(0.7); /* Empezar un poco más pequeño */
+    }
+    100% { /* Estado final */
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes fadeInSmooth {
+    0% { /* Estado inicial */
+      opacity: 0;
+      transform: translateY(15px); /* Empezar ligeramente desplazado hacia abajo */
+    }
+    100% { /* Estado final */
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

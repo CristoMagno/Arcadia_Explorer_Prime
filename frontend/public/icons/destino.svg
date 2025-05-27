@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+  <defs>
+    <filter id="pinDropShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <path fill="#8A2BE2" d="M172.268 501.67C26.97 291.031 0 269.413 0 192 0 85.961 85.961 0 192 0s192 85.961 192 192c0 77.413-26.97 99.031-172.268 309.67a24 24 0 0 1-35.464 0z" filter="url(#pinDropShadow)"/>
+  <circle cx="192" cy="192" r="56" fill="#FFFFFF"/>
+  <circle cx="192" cy="192" r="32" fill="#8A2BE2"/>
+</svg>

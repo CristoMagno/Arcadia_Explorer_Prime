@@ -1,0 +1,6 @@
+Flask
+Flask-CORS
+networkx
+osmnx
+scikit-learn 
+gunicorn

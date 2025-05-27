@@ -1,0 +1,47 @@
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #4f46e5;
+    --accent-color: #5e57e6; /* Used for edit button, ensure it's defined */
+    --background-dark: #1e1e1e;
+    --background-darker: #161827;
+    --input-background: #292929;
+    --text-primary: #ffffff;
+    --text-secondary: #b0b0b0;
+    --text-muted: #888888;
+    --border-color: #444444;
+    --border-focus: #2563eb;
+    --success-color: #10b981;
+    --error-color: #ef4444; /* Used in messages */
+    --warning-color: #f59e0b;
+    --shadow-primary: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.25);
+    --shadow-focus: 0 0 12px rgba(37, 99, 235, 0.4);
+    --border-radius: 12px;
+    --border-radius-sm: 8px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+
+body {
+  background: linear-gradient(
+    to top,
+    #292036,
+    #000000
+  ); /* Degradado de morado de abajo hacia arriba */
+  font-family: "Inter", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: white;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  -moz-tap-highlight-color: transparent; 
+  tap-highlight-color: transparent; 
+}

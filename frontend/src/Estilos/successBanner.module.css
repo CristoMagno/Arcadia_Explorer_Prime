@@ -1,0 +1,63 @@
+.successBanner  {
+  position: fixed; /* Se fija en la parte superior de la ventana */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #a0d194; /* Rojo claro para errores */
+  color: #000000; /* Texto rojo oscuro */
+  padding: 12px 20px; /* Ajusta el padding según necesites */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  z-index: 1050; /* Asegura que esté por encima de otros elementos */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out forwards, fadeOut 0.3s ease-in 1.7s forwards; /* Animación de entrada y salida */
+  border-bottom: 1px solid #f5c6cb;
+  box-sizing: border-box;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+@keyframes slideDownSuccess {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutSuccess {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+.icon {
+  margin-right: 10px;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+}
+
+.message {
+  margin-left: 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}

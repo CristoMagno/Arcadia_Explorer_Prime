@@ -1,0 +1,52 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 32 32"
+  width="20px"
+  height="20px"
+>
+  <title>Monumento Histórico</title>
+  <defs>
+    <linearGradient id="monumentoGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #424242; stop-opacity: 1" />
+      <stop offset="30%" style="stop-color: #616161; stop-opacity: 1" />
+      <stop offset="70%" style="stop-color: #424242; stop-opacity: 1" />
+      <stop offset="100%" style="stop-color: #212121; stop-opacity: 1" />
+    </linearGradient>
+    <linearGradient id="monumentoShadow" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color: #757575; stop-opacity: 0.3" />
+      <stop offset="100%" style="stop-color: #212121; stop-opacity: 0.7" />
+    </linearGradient>
+  </defs>
+  <g fill="url(#monumentoGradient)">
+    <path d="M23.025 12.49H9.005v13.99h14.02z" />
+    <path
+      d="M28.965 29.47H3.025V27.1c0-.35.28-.63.63-.63h24.69c.35 0 .63.28.63.63v2.37z"
+    />
+    <path
+      d="M4.045 10.49h23.95v1.37c0 .35-.28-.63-.63.63h-22.7c-.35 0-.63-.28-.63-.63v-1.37z"
+    />
+    <path d="M8.995 13.46h-2.99v12.1h2.99z" />
+    <path d="M14.655 13.46h-2.99v12.1h2.99z" />
+    <path d="M20.315 13.46h-2.99v12.1h2.99z" />
+    <path d="M25.975 13.46h-2.99v12.1h2.99z" />
+    <path
+      d="M15.326 3.01L3.366 9.75c-.36.2-.22.76.2.76h24.88c.42 0 .56-.55.2-.76l-11.96-6.74c-.42-.24-.94-.24-1.36 0"
+    />
+  </g>
+  <g fill="url(#monumentoShadow)">
+    <path d="M23.025 12.49H9.005v13.99h14.02z" opacity="0.3" />
+    <path d="M26.975 13.46h-2.99v12.1h2.99z" opacity="0.5" />
+    <path d="M21.315 13.46h-2.99v12.1h2.99z" opacity="0.4" />
+    <path d="M15.655 13.46h-2.99v12.1h2.99z" opacity="0.3" />
+  </g>
+  <g fill="#9E9E9E">
+    <path d="M5.015 12.49h4.99v1h-4.99z" />
+    <path d="M10.665 12.49h4.99v1h-4.99z" />
+    <path d="M16.325 12.49h4.99v1h-4.99z" />
+    <path d="M21.985 12.49h4.99v1h-4.99z" />
+    <path d="M5.015 25.48h4.99v1h-4.99z" />
+    <path d="M10.665 25.48h4.99v1h-4.99z" />
+    <path d="M16.325 25.48h4.99v1h-4.99z" />
+    <path d="M21.985 25.48h4.99v1h-4.99z" />
+  </g>
+</svg>

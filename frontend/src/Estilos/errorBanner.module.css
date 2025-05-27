@@ -1,0 +1,52 @@
+.errorBanner {
+  position: fixed; /* Se fija en la parte superior de la ventana */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f8d7da; /* Rojo claro para errores */
+  color: #721c24; /* Texto rojo oscuro */
+  padding: 12px 20px; /* Ajusta el padding según necesites */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  z-index: 1050; /* Asegura que esté por encima de otros elementos */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.3s ease-out forwards, fadeOut 0.3s ease-in 1.7s forwards; /* Animación de entrada y salida */
+  border-bottom: 1px solid #f5c6cb;
+  box-sizing: border-box;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0); /* Mantenemos la posición Y para que no suba al desvanecerse */
+  }
+  to {
+    opacity: 0;
+    transform: translateY(0); /* Importante para que no salte antes de desaparecer */
+    /* visibility: hidden; Podrías añadir esto para asegurar que no interactúa después de desvanecerse */
+  }
+}
+
+.WarningIcon {
+  margin-right: 30px;
+  padding: 30px;
+  flex-shrink: 0; /* Evita que el ícono se encoja */
+}
+
+.errorMessage {
+  margin-left: 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
