@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@react-google-maps/api": "^2.20.6",
-    "firebase": "^11.7.3",
-    "ws": "^8.18.1"
-  }
-}
